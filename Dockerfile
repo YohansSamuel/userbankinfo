@@ -14,7 +14,8 @@ FROM openjdk:17-alpine
 WORKDIR /app
 
 # Copy the jar file from the build stage
-COPY --from=build /app/target/*.jar app.jar
+#COPY --from=build /app/target/*.jar app.jar
+ADD userbankinfo-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the application port
 EXPOSE 8081

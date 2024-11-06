@@ -1,14 +1,13 @@
-name: Java CI with Maven
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      cockroachdb:
+        image: cockroachdb/cockroach:v21.1.8
+        ports:
+          - 26257:26257
+        options: --insecure start-single-node
 
     steps:
       - name: Checkout code
@@ -28,22 +27,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-#      # Load .env file
-#      - name: Load .env variables
-#        run: |
-#          set -a
-#          source .env
-#          set +a
-
-      - name: Run Maven install (optional)
+      - name: Run Maven install
         run: mvn clean install
 
-      - name: Install dependencies and run tests
+      - name: Run tests
         run: mvn clean test
-
-
-      - name: Upload test results (optional)
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: target/surefire-reports
