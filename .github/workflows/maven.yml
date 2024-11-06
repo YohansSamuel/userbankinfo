@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adoptopenjdk'  # Add this line to specify the JDK distribution
+          distribution: 'temurin'  # Add this line to specify the JDK distribution
 
       - name: Cache Maven packages
         uses: actions/cache@v3
