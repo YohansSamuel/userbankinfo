@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  cockroachdb:
+    image: cockroachdb/cockroach:v22.1.3
+    container_name: cockroachdb
+    command: start-single-node --insecure
+    ports:
+      - "26257:26257"  # CockroachDB SQL port
+      - "8080:8080"    # CockroachDB Admin UI port
+    volumes:
+      - cockroach-data:/cockroach/cockroach-data
+    environment:
+      - COCKROACH_MAX_OFFSET=${COCKROACH_MAX_OFFSET}  # Ensure this is in .env file
+
+  springapp:
+    build:
+      context: .
+    container_name: springapp
+    ports:
+      - "8081:8081"  # Expose Spring Boot app on port 8081
+    env_file:
+      - .env  # Load all environment variables from the .env file
+    depends_on:
+      - cockroachdb
+
+volumes:
+  cockroach-data:

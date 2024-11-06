@@ -1,0 +1,18 @@
+# curl -X POST http://localhost:8081/users/5e6f363b-15e7-4a04-bf69-181a5f469feb/bank-information
+#-H "Content-Type: application/json"
+#-d '{
+#    "bankName": "XYZ Bank",
+#    "accountNumber": "1234567890",
+#    "accountType": "Savings"
+#}'
+POST http://localhost:8081/users/5e6f363b-15e7-4a04-bf69-181a5f469feb/bank-information
+Content-Type: application/json
+
+{
+  "bankName": "Ahaz Bank",
+  "accountNumber": "1234567890",
+  "accountType": "Savings"
+}
+
+###
+
