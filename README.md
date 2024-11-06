@@ -28,6 +28,7 @@ This application is designed to manage users and their bank information securely
 - [Running the Application](#running-the-application)
 - [Sample API Requests](#sample-api-requests)
 - [Testing the Application](#testing-the-application)
+- [Environment Variables](#environment-variables)
 - [Additional Notes](#additional-notes)
 
 
@@ -63,11 +64,6 @@ spring.datasource.url=jdbc:cockroachdb://localhost:26257/finance_track_db?sslmod
 spring.datasource.username=root
 spring.datasource.password=
 spring.jpa.hibernate.ddl-auto=update
-```
-## Set Environment Variables for Encryption
-Set the ENCRYPTION_KEY environment variable for encrypting sensitive data:
-```
-export ENCRYPTION_KEY=<your-encryption-key> 
 ```
 ## Running the Application
 Build the application:
