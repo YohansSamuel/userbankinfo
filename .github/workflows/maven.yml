@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: ''
+          distribution: 'adoptopenjdk'  # Add this line to specify the JDK distribution
 
       - name: Cache Maven packages
         uses: actions/cache@v3
@@ -30,13 +30,13 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Install dependencies and run tests
-        run: mvn clean test  # Focuses only on running tests
+        run: mvn clean test
 
       - name: Run Maven install (optional)
-        run: mvn clean install  # If you need to build the project after tests
+        run: mvn clean install
 
       - name: Upload test results (optional)
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: target/surefire-reports  # This is where Maven Surefire stores test results
+          path: target/surefire-reports
