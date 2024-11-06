@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +18,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'  # Add this line to specify the JDK distribution
+          distribution: 'temurin'
 
       - name: Cache Maven packages
         uses: actions/cache@v3
@@ -29,11 +28,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Install dependencies and run tests
-        run: mvn clean test
+      # Load .env file
+      - name: Load .env variables
+        run: |
+          set -a
+          source .env
+          set +a
 
       - name: Run Maven install (optional)
         run: mvn clean install
+
+      - name: Install dependencies and run tests
+        run: mvn clean test
+
 
       - name: Upload test results (optional)
         uses: actions/upload-artifact@v3
